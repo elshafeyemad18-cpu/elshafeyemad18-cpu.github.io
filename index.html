@@ -2,143 +2,71 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>MOHAMED Elshafey | Red Teamer</title>
 <style>
-  *{margin:0; padding:0; box-sizing:border-box; font-family:sans-serif}
-  body{background:#0a0a0a; color:white; text-align:center}
-  nav{background:#111; padding:15px; position:sticky; top:0; z-index:10; display:flex; justify-content:center; gap:10px; flex-wrap:wrap}
-  nav button{background:#1e1e1e; color:white; border:1px solid #333; padding:10px 20px; border-radius:20px; cursor:pointer; font-size:16px; transition:0.3s}
-  nav button:hover, nav button.active{background:red; transform:scale(1.1)}
-  .page{display:none; padding:20px; animation:fade 0.5s}
-  .page.active{display:block}
-  @keyframes fade{from{opacity:0; transform:translateY(20px)} to{opacity:1; transform:translateY(0)}}
-  .hero img{width:150px; height:150px; border-radius:50%; border:3px solid red; object-fit:cover; margin:20px 0}
-  h1{font-size:28px; margin:10px 0} h1 span{color:red}
-  .card{background:#1a1a1a; margin:15px auto; padding:20px; border-radius:15px; max-width:400px; border:1px solid #333; transition:0.3s}
-  .card:hover{transform:translateY(-5px); border-color:red}
-  .card img{width:100%; border-radius:10px; margin-bottom:10px}
-  .btn{background:red; color:white; padding:12px 25px; border:none; border-radius:25px; font-size:17px; margin-top:15px; cursor:pointer}
-
+  *{margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI', Tahoma, sans-serif; -webkit-tap-highlight-color:transparent}
+  html{scroll-behavior:smooth}
+  body{background:#e0f2fe; color:#0f172a; text-align:center; min-height:100vh; overflow-x:hidden}
+  
+  /* الخلفية - خفيفة للموبايل */
   body::before {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    content: ""; position: fixed; top:0; left:0; width:100%; height:100%;
     background-image: url('IMG-20261118-WA5086.jpg');
-    background-size: cover;
-    background-position: center;
-    opacity: 0.4;
-    filter: brightness(1.4);
-    z-index: -1;
+    background-size: cover; background-position: center top;
+    opacity: 0.12; z-index:-2;
+  }
+  body::after {
+    content: ""; position: fixed; top:0; left:0; width:100%; height:100%;
+    background: rgba(224,242,254,0.72); z-index:-1;
   }
 
-  /* الوان فاتحة - سماوي */
-  body {
-    background: #e0f2fe !important;
-    color: #0f172a !important;
-  }
-  nav {
-    background: #38bdf8 !important;
-  }
-  nav button {
-    background: #ffffff !important;
-    color: #0f172a !important;
-  }
-  nav button:hover, nav button.active {
-    background: #0ea5e9 !important;
-    color: white !important;
-  }
-  .card {
-    background: #ffffff !important;
-    color: #0f172a !important;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-  }
-  .btn, button {
-    background: #38bdf8 !important;
-    color: white !important;
-  }
-  h1, h2, h3 {
-    color: #0369a1 !important;
-  }
+  /* الناف بار للموبايل - سكرول افقي */
+  nav{background:#0284c7; padding:10px 8px; position:sticky; top:0; z-index:10; display:flex; justify-content:flex-start; gap:8px; overflow-x:auto; white-space:nowrap; scrollbar-width:none; box-shadow:0 4px 12px rgba(0,0,0,0.15)}
+  nav::-webkit-scrollbar{display:none}
+  nav button{background:#fff; color:#0f172a; border:none; padding:12px 18px; border-radius:25px; cursor:pointer; font-size:15px; font-weight:bold; flex-shrink:0; min-height:44px}
+  nav button.active{background:#0f172a; color:white}
 
-  /* الدايرة اللي في النص - صورة سايبر */
-  .hero img {
-    width: 220px !important;
-    height: 220px !important;
-    border-radius: 50% !important;
-    border: 4px solid #38bdf8 !important;
-    object-fit: cover;
-    box-shadow: 0 0 25px #38bdf8;
-  }
+  .page{display:none; padding:16px 12px 30px; animation:fade 0.4s; width:100%; max-width:520px; margin:0 auto}
+  .page.active{display:block}
+  @keyframes fade{from{opacity:0; transform:translateY(12px)} to{opacity:1; transform:translateY(0)}}
 
-  /* نافذة الشرح - واقعية */
-  .modal {
-    display: none;
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: rgba(0,0,0,0.6);
-    backdrop-filter: blur(3px);
-    z-index: 999;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
+  /* الرئيسية للموبايل */
+  .hero{padding:28px 8px 10px}
+  .hero-badge{background:#fff; display:inline-block; padding:9px 16px; border-radius:20px; font-size:13.5px; margin-bottom:14px; box-shadow:0 4px 12px rgba(0,0,0,0.08); color:#0284c7; font-weight:bold}
+  .hero h1{font-size:26px; line-height:1.6; color:#0f172a}
+  .hero h1 span{color:#0284c7; display:block; font-size:29px; line-height:1.4}
+  .hero p{font-size:16px; font-weight:bold; color:#334155; margin:12px 0 18px; line-height:1.6}
+
+  h1{font-size:24px; margin:12px 0; color:#0f172a}
+  
+  /* الكروت للموبايل - عرض كامل وسهلة اللمس */
+  .card{background:rgba(255,255,255,0.96); margin:12px auto; padding:20px 16px; border-radius:18px; width:100%; max-width:100%; border:1px solid #bae6fd; box-shadow:0 4px 12px rgba(0,0,0,0.08); cursor:pointer; text-align:center}
+  .card:active{transform:scale(0.98); border-color:#0284c7}
+  .card h3{color:#0284c7; font-size:20px; margin:6px 0}
+  .card p{line-height:1.8; font-size:16px; color:#334155}
+  .card .icon{font-size:38px; display:block; margin-bottom:6px}
+  .card .hint{font-size:13px; color:#0284c7; margin-top:10px; font-weight:bold}
+
+  .btn{background:linear-gradient(90deg,#0284c7,#38bdf8); color:white; padding:14px 28px; border:none; border-radius:25px; font-size:16px; font-weight:bold; margin-top:14px; cursor:pointer; box-shadow:0 5px 15px rgba(2,132,199,0.3); display:inline-block; text-decoration:none; min-height:48px; width:100%; max-width:320px; line-height:1.4}
+  .btn-whats{background:#25D366 !important; box-shadow:0 5px 15px rgba(37,211,102,0.35) !important; font-size:17px; padding:16px 20px}
+
+  /* النافذة للموبايل - بتاخد الشاشة كلها تقريبا */
+  .modal{display:none; position:fixed; top:0; left:0; width:100%; height:100%; height:100dvh; background:rgba(0,0,0,0.65); z-index:999; justify-content:center; align-items:flex-end; padding:0}
+  .modal-content{background:#fff; color:#0f172a; padding:22px 18px 24px; border-radius:24px 24px 0 0; width:100%; max-width:520px; max-height:85vh; max-height:85dvh; overflow-y:auto; text-align:right; position:relative}
+  .modal-content h2{color:#0284c7; margin-bottom:4px; font-size:24px}
+  .modal-content .by{font-size:12.5px; color:#64748b; margin-bottom:12px; display:block}
+  .modal-content p{line-height:2; font-size:17px; background:#f0f9ff; padding:14px; border-radius:14px; border:1px solid #e0f2fe; color:#1e293b}
+  .close-btn{background:linear-gradient(90deg,#0284c7,#38bdf8); color:white; border:none; padding:14px; border-radius:25px; margin-top:16px; font-size:16px; font-weight:bold; cursor:pointer; width:100%; min-height:50px}
+  
+  /* للكمبيوتر بس - النافذة تبقى في النص */
+  @media(min-width:600px){
+    nav{justify-content:center}
+    .modal{align-items:center; padding:20px}
+    .modal-content{border-radius:22px; padding:28px; max-height:90vh}
+    .hero h1{font-size:32px} .hero h1 span{font-size:36px}
+    .btn{width:auto}
   }
-  .modal-content {
-    background: linear-gradient(160deg, #e0f2fe 0%, #ffffff 55%, #bae6fd 100%);
-    color: #0f172a;
-    padding: 25px;
-    border-radius: 22px;
-    max-width: 500px;
-    width: 100%;
-    text-align: right;
-    box-shadow: 0 15px 40px rgba(2, 132, 199, 0.35), inset 0 1px 0 rgba(255,255,255,0.9);
-    border: 1.5px solid #7dd3fc;
-    position: relative;
-    overflow: hidden;
-  }
-  .modal-content::before {
-    content: "🛡️";
-    position: absolute;
-    top: -15px;
-    left: -10px;
-    font-size: 90px;
-    opacity: 0.08;
-  }
-  .modal-content h2 {
-    color: #0369a1 !important;
-    margin-bottom: 5px;
-    font-size: 26px;
-  }
-  .modal-content .by {
-    font-size: 13px;
-    color: #64748b;
-    margin-bottom: 12px;
-    display: block;
-  }
-  .modal-content p {
-    line-height: 1.9;
-    font-size: 16.5px;
-    background: rgba(255,255,255,0.7);
-    padding: 15px;
-    border-radius: 14px;
-    border: 1px solid #e0f2fe;
-  }
-  .close-btn {
-    background: linear-gradient(90deg, #0284c7, #38bdf8) !important;
-    color: white !important;
-    border: none;
-    padding: 11px 30px;
-    border-radius: 25px;
-    margin-top: 15px;
-    font-size: 16px;
-    cursor: pointer;
-    box-shadow: 0 5px 15px rgba(2,132,199,0.3);
-  }
-  .card { cursor: pointer; }
 </style>
 </head>
 <body>
@@ -152,9 +80,9 @@
 
 <div id="home" class="page active">
   <div class="hero">
-    <img src="cyber.jpg">
+    <div class="hero-badge">🛡️ Red Teamer | Cyber Security</div>
     <h1>انا <span>الباش مهندس محمد الشافعي</span></h1>
-    <p>Red Teamer 🔥 | Cyber Security</p>
+    <p>بحمي الأنظمة قبل ما الهاكرز يوصلوا ليها 🔥</p>
     <button class="btn" onclick="showPage('about',document.querySelectorAll('nav button')[1])">اعرف عني اكتر 👇</button>
   </div>
 </div>
@@ -163,27 +91,32 @@
   <h1>مين هوا الشافعي؟</h1>
   <div class="card"><p>بحب اخترق الأنظمة بشكل قانوني، واكتشف الثغرات قبل الهاكرز 😎</p></div>
   <div class="card"><p>شغال على Kali Linux وبتعلم كل يوم حاجة جديدة</p></div>
+  <div class="card"><p>هدفي اني ابقى Red Teamer محترف واحمي الشركات والمواقع من الاختراق</p></div>
 </div>
 
 <div id="tools" class="page">
   <h1>اختصاصاتي ⚔️</h1>
-  <div class="card"><img src="tools.jpg"><h3>Nmap</h3><p>عمل مسح الشبكات واكتشاف الأجهزة</p></div>
-  <div class="card"><h3>Burp Suite</h3><p>لاختبار ثغرات المواقع</p></div>
-  <div class="card"><h3>Metasploit</h3><p>لاستغلال الثغرات</p></div>
+  <p style="color:#475569; margin-bottom:14px; font-size:15px">دوس على اي اداة عشان تشوف شرحي وتجربتي فيها</p>
+  <div class="card"><span class="icon">🌐</span><h3>Nmap</h3><p>عمل مسح الشبكات واكتشاف الأجهزة</p><div class="hint">دوس عشان تشوف شرحي 👆</div></div>
+  <div class="card"><span class="icon">🕵️</span><h3>Burp Suite</h3><p>لاختبار ثغرات المواقع</p><div class="hint">دوس عشان تشوف شرحي 👆</div></div>
+  <div class="card"><span class="icon">💥</span><h3>Metasploit</h3><p>لاستغلال الثغرات</p><div class="hint">دوس عشان تشوف شرحي 👆</div></div>
+  <div class="card"><span class="icon">📡</span><h3>Wireshark</h3><p>تحليل حزم الشبكة ومراقبة البيانات</p><div class="hint">دوس عشان تشوف شرحي 👆</div></div>
+  <div class="card"><span class="icon">🔐</span><h3>Hydra</h3><p>اختبار قوة كلمات السر</p><div class="hint">دوس عشان تشوف شرحي 👆</div></div>
+  <div class="card"><span class="icon">💉</span><h3>SQLmap</h3><p>اكتشاف ثغرة SQL Injection</p><div class="hint">دوس عشان تشوف شرحي 👆</div></div>
 </div>
 
 <div id="contact" class="page">
   <h1>تواصل معي</h1>
-  <div class="card">
-    <p>تليجرام / واتساب : 01273102956</p>
+  <div class="card" style="cursor:default">
+    <span class="icon">💬</span>
+    <p style="font-size:18px; font-weight:bold">تليجرام / واتساب : 01273102956</p>
     <br>
-    <a href="https://wa.me/201273102956?text=بعد%20اذنك%20يا%20هندسه%20انا%20شوفت%20الويب%20سايت%20بتاعك%20وعايز%20اكلمك" target="_blank" class="btn" style="background:#25D366; font-size:19px; text-decoration:none; display:inline-block;">
+    <a href="https://wa.me/201273102956?text=%D8%A8%D8%B9%D8%AF%20%D8%A7%D8%B0%D9%86%D9%83%20%D9%8A%D8%A7%20%D9%87%D9%86%D8%AF%D8%B3%D9%87%20%D8%A7%D9%86%D8%A7%20%D8%B4%D9%88%D9%81%D8%AA%20%D8%A7%D9%84%D9%88%D9%8A%D8%A8%20%D8%B3%D8%A7%D9%8A%D8%AA%20%D8%A8%D8%AA%D8%A7%D8%B9%D9%83%20%D9%88%D8%B9%D8%A7%D9%8A%D8%B2%20%D8%A7%D9%83%D9%84%D9%85%D9%83" target="_blank" class="btn btn-whats">
       عايز مساعدتي انا مستنيك علي الواتس 💬
     </a>
   </div>
 </div>
 
-<!-- نافذة الشرح -->
 <div id="toolModal" class="modal">
   <div class="modal-content">
     <h2 id="modalTitle"></h2>
@@ -201,13 +134,14 @@ function showPage(id, btn){
   if(btn) btn.classList.add('active');
   window.scrollTo(0,0);
 }
-
 const tools = {
   "Nmap": "دي اول اداة اتعلمتها لما بدأت في المجال. ببساطة هي بتعملي سكان للشبكة وبتعرفني ايه الاجهزة اللي شغالة، وايه البورتات المفتوحة، وايه نظام التشغيل. يعني قبل ما اعمل اي حاجة لازم اعرف انا بتعامل مع ايه الاول، ودي اللي بتجيبلي المعلومات دي. جربتها كتير على الشبكة بتاعتي في البيت.",
   "Burp Suite": "دي الاداة اللي حببتني في اختبار المواقع. فكرتها انها بتقف في النص بين المتصفح والموقع وبتخليني اشوف كل الطلبات اللي بتتبعت. كده بقدر اعدل في الطلب واجرب ثغرات زي XSS و SQL Injection بنفسي. اول مرة جربتها حسيت اني شايف الموقع من جوه.",
-  "Metasploit": "دي بقى المرحلة اللي بعد ما الاقي الثغرة. يعني بعد ما اعمل سكان بـ Nmap والاقي ثغرة، باجي هنا عشان استغلها. فيها ثغرات كتير جاهزة، وانا بطبق عليها اللي اتعلمته في المعمل بتاعي. اهم حاجة اتعلمتها اني لازم اجرب على اجهزة خاصة بيا مش على اجهزة الناس."
+  "Metasploit": "دي بقى المرحلة اللي بعد ما الاقي الثغرة. يعني بعد ما اعمل سكان بـ Nmap والاقي ثغرة، باجي هنا عشان استغلها. فيها ثغرات كتير جاهزة، وانا بطبق عليها اللي اتعلمته في المعمل بتاعي. اهم حاجة اتعلمتها اني لازم اجرب على اجهزة خاصة بيا مش على اجهزة الناس.",
+  "Wireshark": "دي اللي علمتني الشبكة ماشية ازاي بجد. بتخليني اشوف كل حزمة بيانات ماشية رايحة وجاية. كنت بفتحها وانا بتصفح عادي واشوف البيانات بتتحرك ازاي، وده فهمني حاجات كتير عن الحماية وازاي البيانات ممكن تتسرب.",
+  "Hydra": "دي جربتها عشان افهم ازاي كلمات السر الضعيفة بتتكسر. هي بتجرب كلمات سر كتير بسرعة على خدمات زي SSH. التجربة دي خلتني اعرف ليه لازم كلمة السر تكون قوية وطويلة، لان الضعيفة بتتكسر في ثواني.",
+  "SQLmap": "دي اداة متخصصة في ثغرة SQL Injection. اول ما شفتها كنت مستغرب ازاي بتقدر تسحب الداتا من قاعدة البيانات لوحدها. اتعلمت منها ازاي المطورين لازم يحموا المواقع بتاعتهم، وان اي مدخل بيانات مش متأمن ممكن يعمل مشكلة كبيرة."
 };
-
 document.querySelectorAll('#tools .card').forEach(card => {
   card.addEventListener('click', () => {
     let title = card.querySelector('h3') ? card.querySelector('h3').innerText.trim() : '';
@@ -216,18 +150,14 @@ document.querySelectorAll('#tools .card').forEach(card => {
         document.getElementById('modalTitle').innerText = key;
         document.getElementById('modalText').innerText = tools[key];
         document.getElementById('toolModal').style.display = 'flex';
+        document.body.style.overflow = 'hidden';
         return;
       }
     }
   });
 });
-
-function closeModal() {
-  document.getElementById('toolModal').style.display = 'none';
-}
-document.getElementById('toolModal').addEventListener('click', (e) => {
-  if (e.target.id === 'toolModal') closeModal();
-});
+function closeModal() { document.getElementById('toolModal').style.display = 'none'; document.body.style.overflow = ''; }
+document.getElementById('toolModal').addEventListener('click', (e) => { if (e.target.id === 'toolModal') closeModal(); });
 </script>
 </body>
- </html>
+                                                                                                                                         </html>
