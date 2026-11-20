@@ -6,31 +6,23 @@
 <title>MOHAMED Elshafey | Red Teamer</title>
 <style>
   *{margin:0; padding:0; box-sizing:border-box; font-family:sans-serif}
-  /* الخلفية = صورة الروبوت */
-  body{
-    background: #000 url('me.jpg') no-repeat center center fixed;
-    background-size: cover;
-    color:white; text-align:center; min-height:100vh;
-  }
-  /* طبقة شفافة خفيفة فوق الروبوت عشان الكلام يبان */
-  body::before{
-    content:""; position:fixed; inset:0;
-    background:rgba(0,0,0,0.35);
-    z-index:-1;
-  }
+  body{color:white; text-align:center; min-height:100vh}
+  .bg{position:fixed; inset:0; z-index:-2; background: url('bg.jpg') no-repeat center center; background-size: cover;}
+  .bg-overlay{position:fixed; inset:0; z-index:-1; background:rgba(0,0,0,0.35);}
   nav{background:rgba(0,0,0,0.55); padding:15px; position:sticky; top:0; z-index:10; display:flex; justify-content:center; gap:10px; flex-wrap:wrap; backdrop-filter:blur(5px)}
   nav button{background:rgba(255,255,255,0.15); color:white; border:1px solid rgba(255,255,255,0.4); padding:10px 20px; border-radius:20px; cursor:pointer; font-size:16px; transition:0.3s; font-weight:bold}
   nav button:hover, nav button.active{background:#00CFFF; color:white; transform:scale(1.1); border-color:#00CFFF}
-  .page{display:none; padding:20px; animation:fade 0.5s}
-  .page.active{display:block}
+  .page{display:none !important; padding:20px; animation:fade 0.5s}
+  .page.active{display:block !important}
   @keyframes fade{from{opacity:0; transform:translateY(20px)} to{opacity:1; transform:translateY(0)}}
   .hero{padding-top:50px}
   h1{font-size:38px; margin:10px 0; color:white; text-shadow:0 2px 10px black}
   .subtitle{color:#00E5FF; font-size:22px; font-weight:bold; margin:5px 0; text-shadow:0 2px 10px black}
   h2{color:#00E5FF; margin:30px 0 10px; font-size:22px; text-align:right; max-width:500px; margin-left:auto; margin-right:auto}
-  .card{background:rgba(0,0,0,0.55); margin:15px auto; padding:20px; border-radius:15px; max-width:400px; border:1px solid rgba(255,255,255,0.25); transition:0.3s; color:white; backdrop-filter:blur(5px)}
-  .card:hover{transform:translateY(-5px); border-color:#00CFFF}
-  .card img{width:100%; border-radius:10px; margin-bottom:10px}
+  .card{background:rgba(0,0,0,0.55); margin:15px auto; padding:20px; border-radius:15px; max-width:400px; border:1px solid rgba(255,255,255,0.25); transition:0.3s; color:white; backdrop-filter:blur(5px); cursor:pointer}
+  .card:hover{transform:translateY(-5px) scale(1.02); border-color:#00CFFF; background:rgba(0,207,255,0.15)}
+  .card .emoji{font-size:35px}
+  .card small{color:#00E5FF}
   .btn{background:#00CFFF; color:white; padding:12px 25px; border:none; border-radius:25px; font-size:17px; margin-top:15px; cursor:pointer; text-decoration:none; display:inline-block; font-weight:bold; box-shadow:0 4px 15px rgba(0,207,255,0.4)}
   .cv-list{max-width:500px; margin:0 auto; text-align:right; background:rgba(0,0,0,0.55); padding:10px 20px; border-radius:15px; backdrop-filter:blur(5px)}
   .cv-line{padding:14px 5px; border-bottom:1px solid rgba(255,255,255,0.2); font-size:17px; line-height:1.6}
@@ -39,9 +31,19 @@
   .social-row{display:flex; justify-content:center; gap:15px; margin-top:20px; flex-wrap:wrap}
   .icon-btn{width:65px; height:65px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:32px; text-decoration:none; color:white; transition:0.3s}
   .icon-btn:hover{transform:scale(1.15)}
+  .modal{display:none; position:fixed; inset:0; background:rgba(0,0,0,0.8); z-index:100; align-items:center; justify-content:center; padding:20px}
+  .modal.open{display:flex}
+  .modal-box{background:#111; border:1px solid #00CFFF; border-radius:20px; max-width:450px; width:100%; padding:25px; text-align:right; animation:fade 0.3s}
+  .modal-box h2{text-align:center; margin-top:0}
+  .modal-box p{line-height:1.8; margin:10px 0; color:#ddd}
+  .modal-box code{display:block; background:#000; color:#00E5FF; padding:12px; border-radius:10px; direction:ltr; text-align:left; margin:10px 0; font-size:14px; overflow-x:auto}
+  .close-btn{background:#00CFFF; color:white; border:none; padding:10px 25px; border-radius:20px; width:100%; font-size:16px; margin-top:10px; cursor:pointer; font-weight:bold}
 </style>
 </head>
 <body>
+
+<div class="bg"></div>
+<div class="bg-overlay"></div>
 
 <nav>
   <button class="active" onclick="showPage('home',this)">الرئيسية</button>
@@ -50,9 +52,9 @@
   <button onclick="showPage('contact',this)">تواصل</button>
 </nav>
 
+<!-- الصفحة 1 : الرئيسية -->
 <div id="home" class="page active">
   <div class="hero">
-    <!-- شلنا الدايرة اللي هنا خالص -->
     <h1>محمد الشافعي</h1>
     <p class="subtitle">الباش مهندس</p>
     <p>Red Teamer 🔥 | Cyber Security</p>
@@ -60,6 +62,7 @@
   </div>
 </div>
 
+<!-- الصفحة 2 : اعرف عني اكتر - لوحدها -->
 <div id="about" class="page">
   <h1>اعرف عني اكتر</h1>
   <p style="color:#ddd; margin:10px 0;">My Journey - رحلتي</p>
@@ -72,17 +75,6 @@
     <div class="cv-line"><b>Penetration Testing:</b> <span>بتعلم اختبار اختراق الأنظمة بشكل قانوني</span></div>
     <div class="cv-line"><b>Network Scanning:</b> <span>بتعلم مسح الشبكات واكتشاف الأجهزة</span></div>
     <div class="cv-line"><b>Web Security:</b> <span>بتعلم ثغرات المواقع وازاي احميها</span></div>
-    <div class="card" onclick="openTool('nmap')"><div class="emoji">🌐</div><h3>Nmap</h3><p>Network Scanning & Device Discovery</p><small>دوس هنا 👆</small></div>
-    <div class="card" onclick="openTool('burp')"><div class="emoji">🕵️</div><h3>Burp Suite</h3><p>Web Application Penetration Testing</p><small>دوس هنا 👆</small></div>
-    <div class="card" onclick="openTool('metasploit')"><div class="emoji">💥</div><h3>Metasploit</h3><p>Exploitation Framework</p><small>دوس هنا 👆</small></div>
-    <div class="card" onclick="openTool('wireshark')"><div class="emoji">🦈</div><h3>Wireshark</h3><p>Network Traffic Analysis</p><small>دوس هنا 👆</small></div>
-    <div class="card" onclick="openTool('hydra')"><div class="emoji">🔓</div><h3>Hydra</h3><p>Password Brute Force Attack</p><small>دوس هنا 👆</small></div>
-    <div class="card" onclick="openTool('sqlmap')"><div class="emoji">💉</div><h3>SQLmap</h3><p>SQL Injection Testing</p><small>دوس هنا 👆</small></div>
-    <div class="card" onclick="openTool('john')"><div class="emoji">🔑</div><h3>John The Ripper</h3><p>Password Cracking</p><small>دوس هنا 👆</small></div>
-    <div class="card" onclick="openTool('nikto')"><div class="emoji">🔍</div><h3>Nikto</h3><p>Web Server Scanner</p><small>دوس هنا 👆</small></div>
-    <div class="card" onclick="openTool('aircrack')"><div class="emoji">📶</div><h3>Aircrack-ng</h3><p>WiFi Security Testing</p><small>دوس هنا 👆</small></div>
-</div>
-
     <h2>My Labs & Practice</h2>
     <div class="cv-line"><b>Practice:</b> <span>بجرب في معامل وهمية - Labs - عشان اتعلم صح</span></div>
     <div class="cv-line"><b>Projects:</b> <span>الموقع ده اول مشروع ليا، وببنيه بنفسي من الصفر</span></div>
@@ -92,21 +84,41 @@
   </div>
 </div>
 
+<!-- الصفحة 3 : اختصاصاتي - لوحدها -->
 <div id="tools" class="page">
   <h1>اختصاصاتي ⚔️</h1>
-  <div class="card"><img src="tools.jpg"><h3>Nmap</h3><p>Network Scanning & Device Discovery</p></div>
-  <div class="card"><h3>Burp Suite</h3><p>Web Application Penetration Testing</p></div>
-  <div class="card"><h3>Metasploit</h3><p>Exploitation Framework</p></div>
+  <p style="color:#ddd; margin-bottom:10px;">دوس على اي اداة عشان تعرف معلوماتها 👇</p>
+  <div class="card" onclick="openTool('nmap')"><div class="emoji">🌐</div><h3>Nmap</h3><p>Network Scanning & Device Discovery</p><small>دوس هنا 👆</small></div>
+  <div class="card" onclick="openTool('burp')"><div class="emoji">🕵️</div><h3>Burp Suite</h3><p>Web Application Penetration Testing</p><small>دوس هنا 👆</small></div>
+  <div class="card" onclick="openTool('metasploit')"><div class="emoji">💥</div><h3>Metasploit</h3><p>Exploitation Framework</p><small>دوس هنا 👆</small></div>
+  <div class="card" onclick="openTool('wireshark')"><div class="emoji">🦈</div><h3>Wireshark</h3><p>Network Traffic Analysis</p><small>دوس هنا 👆</small></div>
+  <div class="card" onclick="openTool('hydra')"><div class="emoji">🔓</div><h3>Hydra</h3><p>Password Brute Force Attack</p><small>دوس هنا 👆</small></div>
+  <div class="card" onclick="openTool('sqlmap')"><div class="emoji">💉</div><h3>SQLmap</h3><p>SQL Injection Testing</p><small>دوس هنا 👆</small></div>
+  <div class="card" onclick="openTool('john')"><div class="emoji">🔑</div><h3>John The Ripper</h3><p>Password Cracking</p><small>دوس هنا 👆</small></div>
+  <div class="card" onclick="openTool('nikto')"><div class="emoji">🔍</div><h3>Nikto</h3><p>Web Server Scanner</p><small>دوس هنا 👆</small></div>
+  <div class="card" onclick="openTool('aircrack')"><div class="emoji">📶</div><h3>Aircrack-ng</h3><p>WiFi Security Testing</p><small>دوس هنا 👆</small></div>
 </div>
 
+<!-- الصفحة 4 : تواصل -->
 <div id="contact" class="page">
   <h1>تواصل معي</h1>
   <p style="color:#ddd; margin-top:10px;">تليجرام / واتساب : 01273102956</p>
   <div class="social-row">
-    <a href="https://wa.me/201273102956?text=اهلا%20يا%20محمد%20انا%20شوفت%20موقعك%20وعايز%20اكلمك" target="_blank" class="icon-btn" style="background:#25D366;" title="WhatsApp">💬</a>
-    <a href="https://github.com/elshafeyemad18-cpu" target="_blank" class="icon-btn" style="background:#24292f; border:1px solid #555;" title="GitHub - شغلي كله هنا">💻</a>
+    <a href="https://wa.me/201273102956?text=اهلا%20يا%20محمد%20انا%20شوفت%20موقعك%20وعايز%20اكلمك" target="_blank" class="icon-btn" style="background:#25D366;">💬</a>
+    <a href="https://github.com/elshafeyemad18-cpu" target="_blank" class="icon-btn" style="background:#24292f; border:1px solid #555;">💻</a>
   </div>
   <p style="margin-top:20px; color:#ddd;">عايز مساعدتي انا مستنيك علي الواتس يا زميلي 💬<br>وعايز تشوف شغلي كله، دوس على ايقونة الجيت هاب</p>
+</div>
+
+<div id="toolModal" class="modal" onclick="if(event.target==this) closeTool()">
+  <div class="modal-box">
+    <h2 id="toolTitle">Nmap</h2>
+    <p id="toolDesc"></p>
+    <b style="color:#00E5FF">مثال للأمر:</b>
+    <code id="toolCmd"></code>
+    <p id="toolUse"></p>
+    <button class="close-btn" onclick="closeTool()">اقفل ✖️</button>
+  </div>
 </div>
 
 <script>
@@ -117,6 +129,26 @@ function showPage(id, btn){
   if(btn) btn.classList.add('active');
   window.scrollTo(0,0);
 }
+const tools = {
+  nmap:{title:'🌐 Nmap', desc:'دي اول اداة اي هاكر اخلاقي بيتعلمها. بتفحص الشبكة وبتعرف ايه الاجهزة المتصلة، وايه البورتات المفتوحة، وايه الخدمات اللي شغالة.', cmd:'nmap -sV 192.168.1.1', use:'بنستخدمها عشان نعرف خريطة الشبكة قبل ما نبدأ اي اختبار اختراق.'},
+  burp:{title:'🕵️ Burp Suite', desc:'دي اهم اداة لاختبار اختراق المواقع. بتمسك الطلبات اللي رايحة وجاية بين المتصفح والموقع، وتقدر تعدل فيها وتجرب ثغرات.', cmd:'Burp Suite -> Proxy -> Intercept ON', use:'بنستخدمها عشان نكتشف ثغرات المواقع زي XSS و SQL Injection.'},
+  metasploit:{title:'💥 Metasploit', desc:'دي اقوى منصة استغلال في العالم. فيها الاف الثغرات الجاهزة، بتجرب بيها هل الثغرة دي شغالة بجد ولا لا.', cmd:'msfconsole', use:'بنستخدمها في مرحلة الاستغلال، بعد ما نلاقي الثغرة.'},
+  wireshark:{title:'🦈 Wireshark', desc:'دي بتخليك تشوف كل حاجة ماشية في الشبكة، كل باكت، كل باسورد لو مش متشفر، كل حاجة.', cmd:'wireshark -> Filter: http', use:'بنستخدمها عشان نحلل الترافيك ونفهم الشبكة شغالة ازاي.'},
+  hydra:{title:'🔓 Hydra', desc:'دي اداة تخمين باسوردات، بتجرب الاف الباسوردات بسرعة على اي خدمة، زي SSH او FTP او صفحة دخول.', cmd:'hydra -l admin -P passwords.txt ssh://192.168.1.1', use:'بنستخدمها عشان نختبر قوة الباسوردات في المعامل بتاعتنا بس.'},
+  sqlmap:{title:'💉 SQLmap', desc:'دي اداة اوتوماتيك بتكتشف ثغرة SQL Injection في المواقع وبتستغلها وبتجيب الداتا من قاعدة البيانات.', cmd:'sqlmap -u "http://site.com?id=1" --dbs', use:'بنستخدمها عشان نختبر حماية قواعد البيانات بتاعت المواقع.'},
+  john:{title:'🔑 John The Ripper', desc:'دي اداة فك تشفير الباسوردات، لو معاك هاش مشفر، هي بتحاول ترجعه باسورد عادي.', cmd:'john --wordlist=rockyou.txt hash.txt', use:'بنستخدمها عشان نعرف لو الباسورد ضعيف وسهل يتفك.'},
+  nikto:{title:'🔍 Nikto', desc:'دي بتفحص سيرفرات المواقع، وبتدور على ملفات قديمة، وثغرات معروفة، واعدادات غلط.', cmd:'nikto -h http://example.com', use:'بنستخدمها في اول فحص لاي موقع قبل ما نبدأ اختبار يدوي.'},
+  aircrack:{title:'📶 Aircrack-ng', desc:'دي ادوات اختبار حماية الواي فاي، بتقدر تختبر هل شبكة الواي فاي بتاعتك قوية ولا سهلة الاختراق.', cmd:'aircrack-ng -w wordlist.txt capture.cap', use:'بنستخدمها عشان نختبر حماية شبكات الواي فاي في المعمل.'}
+};
+function openTool(key){
+  const t = tools[key];
+  document.getElementById('toolTitle').innerText = t.title;
+  document.getElementById('toolDesc').innerText = t.desc;
+  document.getElementById('toolCmd').innerText = t.cmd;
+  document.getElementById('toolUse').innerText = t.use;
+  document.getElementById('toolModal').classList.add('open');
+}
+function closeTool(){ document.getElementById('toolModal').classList.remove('open'); }
 </script>
 </body>
-     </html>
+ </html>
